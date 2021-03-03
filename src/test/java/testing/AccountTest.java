@@ -2,8 +2,7 @@ package testing;
 
 import org.junit.jupiter.api.Test;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 class AccountTest {
@@ -15,8 +14,7 @@ class AccountTest {
 
         //then
         assertFalse(account.isActive(), "Check if new account is not active");
-        assertThat(account.isActive(), equalTo(false));
-        assertThat(account.isActive(), is(false));
+        assertThat(account.isActive()).isFalse();
     }
 
     @Test
@@ -29,7 +27,7 @@ class AccountTest {
 
         //then
         assertTrue(account.isActive());
-        assertThat(account.isActive(), equalTo(true));
+        assertThat(account.isActive()).isTrue();
     }
 
     @Test
@@ -42,7 +40,7 @@ class AccountTest {
 
         //then
         assertNull(address);
-        assertThat(address,nullValue());
+        assertThat(address).isNull();
     }
 
     @Test
@@ -57,7 +55,7 @@ class AccountTest {
 
         //then
         assertNotNull(address1);
-        assertThat(address1, is(notNullValue()));
+        assertThat(address1).isNotNull();
 
     }
 }

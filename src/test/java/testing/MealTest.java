@@ -2,8 +2,8 @@ package testing;
 
 import org.junit.jupiter.api.Test;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+
+import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 class MealTest {
@@ -18,7 +18,7 @@ class MealTest {
 
         //then
         assertEquals(28,discountedPrice);
-        assertThat(discountedPrice, equalTo(28));
+        assertThat(discountedPrice).isEqualTo(28);
     }
 
     @Test
@@ -29,7 +29,7 @@ class MealTest {
 
         //then
         assertSame(meal1,meal2);
-        assertThat(meal1, sameInstance(meal2));
+        assertThat(meal1).isSameAs(meal2);
     }
 
     @Test
@@ -40,17 +40,17 @@ class MealTest {
 
         //then
         assertNotSame(meal1,meal2);
-        assertThat(meal1,not(sameInstance(meal2)));
+        assertThat(meal1).isNotSameAs(meal2);
     }
 
     @Test
     void twoMealsShouldBeEqualWhenPriceAndNameAreTheSame(){
         //given
         Meal meal1 = new Meal(10,"pizza");
-        Meal meal2 = new Meal(18,"pizza");
+        Meal meal2 = new Meal(10,"pizza");
 
         //then
         assertEquals(meal1,meal2,"Checking if two meals are equal");
-        
+        assertThat(meal1).isEqualTo(meal2);
     }
 }
