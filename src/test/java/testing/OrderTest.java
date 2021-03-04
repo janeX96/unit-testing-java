@@ -1,5 +1,7 @@
 package testing;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -15,11 +17,26 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class OrderTest {
 
+    private Order order;
+
+    @BeforeEach
+    void initializeOrder(){
+        //System.out.println("Inside @BeforeEach method");
+        order = new Order();
+    }
+
+    @AfterEach
+    void cleanUp(){
+        //System.out.println("Inside @AfterEach method");
+        order.cancel();
+    }
+
     @Test
     void testAssertArrayEquals(){
         //given
         int[] ints1 = {1,2,3};
         int[] ints2 = {1,2,3};
+
 
         //then
         assertArrayEquals(ints1,ints2);
@@ -27,9 +44,6 @@ public class OrderTest {
 
     @Test
     void mealListShouldBeEmptyAfterCreationOfOrder(){
-        //given
-        Order order = new Order();
-
         //then
         assertThat(order.getMeals(), empty());
         assertThat(order.getMeals().size(),equalTo(0));
@@ -42,7 +56,7 @@ public class OrderTest {
         //given
         Meal meal = new Meal(15,"burger");
         Meal meal2 = new Meal(7,"sandwich");
-        Order order = new Order();
+
 
         //when
         order.addMealToOrder(meal);
@@ -58,7 +72,6 @@ public class OrderTest {
     void removingMealFromOrderShouldDecreaseOrderSize(){
         //given
         Meal meal = new Meal(15,"burger");
-        Order order = new Order();
 
         //when
         order.addMealToOrder(meal);
@@ -74,7 +87,6 @@ public class OrderTest {
         //given
         Meal meal = new Meal(15,"burger");
         Meal meal2 = new Meal(7,"sandwich");
-        Order order = new Order();
 
         //when
         order.addMealToOrder(meal);
@@ -88,7 +100,6 @@ public class OrderTest {
     void testIfTwoMealListAreTheSame(){
         Meal meal = new Meal(15,"burger");
         Meal meal2 = new Meal(7,"sandwich");
-        Meal meal3 = new Meal(11,"kebab");
 
         List<Meal> meals1 = Arrays.asList(meal,meal2);
         List<Meal> meals2 = Arrays.asList(meal,meal2);
@@ -97,4 +108,6 @@ public class OrderTest {
 
 
     }
+
+
 }
